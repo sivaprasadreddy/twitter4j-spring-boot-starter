@@ -44,7 +44,7 @@ public class Twitter4jAutoConfiguration {
 		}
 		
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(properties.getDebug())
+		cb.setDebugEnabled(properties.isDebug())
 		  .setOAuthConsumerKey(properties.getOauth().getConsumerKey())
 		  .setOAuthConsumerSecret(properties.getOauth().getConsumerSecret())
 		  .setOAuthAccessToken(properties.getOauth().getAccessToken())
