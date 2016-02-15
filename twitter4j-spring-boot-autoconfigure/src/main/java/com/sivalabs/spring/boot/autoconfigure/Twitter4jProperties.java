@@ -4,7 +4,6 @@
 package com.sivalabs.spring.boot.autoconfigure;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * @author Siva
@@ -14,17 +13,19 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 public class Twitter4jProperties {
 	
 	public static final String TWITTER4J_PREFIX = "twitter4j";
+
+	/**
+	 * Enables deubg output. Effective only with the embedded logger.
+	 */
+	private boolean debug = false;
 	
-	private Boolean debug = false;
-	
-	@NestedConfigurationProperty
-	private OAuth oauth = new OAuth();
-	
-	public Boolean getDebug() {
+	private final OAuth oauth = new OAuth();
+
+	public boolean isDebug() {
 		return debug;
 	}
 
-	public void setDebug(Boolean debug) {
+	public void setDebug(boolean debug) {
 		this.debug = debug;
 	}
 
@@ -32,15 +33,26 @@ public class Twitter4jProperties {
 		return oauth;
 	}
 
-	public void setOauth(OAuth oauth) {
-		this.oauth = oauth;
-	}
-
 	public static class OAuth {
-		
+
+		/**
+		 * OAuth consumer key.
+		 */
 		private String consumerKey;
+
+		/**
+		 * OAuth consumer secret.
+		 */
 		private String consumerSecret;
+
+		/**
+		 * OAuth access token.
+		 */
 		private String accessToken;
+
+		/**
+		 * OAuth access token secret.
+		 */
 		private String accessTokenSecret;
 		
 		public String getConsumerKey() {
