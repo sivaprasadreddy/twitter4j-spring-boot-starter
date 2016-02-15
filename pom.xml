@@ -18,7 +18,6 @@
 	<modules>
 		<module>twitter4j-spring-boot-autoconfigure</module>
 		<module>twitter4j-spring-boot-starter</module>
-		<module>twitter4j-spring-boot-sample</module>
 	</modules>
 
 	<dependencyManagement>
