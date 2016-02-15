@@ -3,7 +3,7 @@ SpringBoot Starter for Twitter4J
 
 ## How to use?
 
-**cd twitter4j-spring-boot-starter-parent**
+**cd twitter4j-spring-boot-starter**
 
 **mvn clean install**
 
