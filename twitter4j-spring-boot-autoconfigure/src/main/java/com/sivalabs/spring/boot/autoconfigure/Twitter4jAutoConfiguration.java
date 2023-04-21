@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.sivalabs.spring.boot.autoconfigure;
 
 import org.apache.commons.logging.Log;
@@ -11,53 +8,40 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import twitter4j.Twitter;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * @author Siva
- *
  */
 @Configuration
-@ConditionalOnClass({ TwitterFactory.class, Twitter.class })
+@ConditionalOnClass(Twitter.class)
 @EnableConfigurationProperties(Twitter4jProperties.class)
 public class Twitter4jAutoConfiguration {
 
-	private static Log log = LogFactory.getLog(Twitter4jAutoConfiguration.class);
+    private static final Log log = LogFactory.getLog(Twitter4jAutoConfiguration.class);
 
-	private final Twitter4jProperties properties;
+    private final Twitter4jProperties properties;
 
-	public Twitter4jAutoConfiguration(Twitter4jProperties twitter4jProperties){
-		this.properties = twitter4jProperties;
-	}
-	
-	@Bean
-	@ConditionalOnMissingBean
-	public TwitterFactory twitterFactory(){
-		
-		if (this.properties.getOauth().getConsumerKey() == null
-			|| this.properties.getOauth().getConsumerSecret() == null
-			|| this.properties.getOauth().getAccessToken() == null
-			|| this.properties.getOauth().getAccessTokenSecret() == null) 
-		{
-			log.error("Twitter4j properties not configured properly. Please check twitter4j.* properties settings in configuration file.");
-			throw new RuntimeException("Twitter4j properties not configured properly. Please check twitter4j.* properties settings in configuration file.");
-		}
-		
-		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(properties.isDebug())
-		  .setOAuthConsumerKey(properties.getOauth().getConsumerKey())
-		  .setOAuthConsumerSecret(properties.getOauth().getConsumerSecret())
-		  .setOAuthAccessToken(properties.getOauth().getAccessToken())
-		  .setOAuthAccessTokenSecret(properties.getOauth().getAccessTokenSecret());
-		TwitterFactory tf = new TwitterFactory(cb.build());
-		return tf;
-	}
-	
-	@Bean
-	@ConditionalOnMissingBean
-	public Twitter twitter(TwitterFactory twitterFactory){
-		return twitterFactory.getInstance();
-	}
-	
+    public Twitter4jAutoConfiguration(Twitter4jProperties twitter4jProperties) {
+        this.properties = twitter4jProperties;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public Twitter twitter() {
+        if (this.properties.getOauth().getConsumerKey() == null
+                || this.properties.getOauth().getConsumerSecret() == null
+                || this.properties.getOauth().getAccessToken() == null
+                || this.properties.getOauth().getAccessTokenSecret() == null) {
+            log.error("Twitter4j properties not configured properly. Please check twitter4j.* properties settings in configuration file.");
+            throw new RuntimeException(
+                    "Twitter4j properties not configured properly. Please check twitter4j.* properties settings in configuration file.");
+        }
+        return Twitter.newBuilder()
+                .prettyDebugEnabled(properties.isDebug())
+                .oAuthConsumer(properties.getOauth().getConsumerKey(),
+                        properties.getOauth().getConsumerSecret())
+                .oAuthAccessToken(properties.getOauth().getAccessToken(),
+                        properties.getOauth().getAccessTokenSecret()).build();
+    }
+
 }

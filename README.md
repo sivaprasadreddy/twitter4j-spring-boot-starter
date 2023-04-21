@@ -1,24 +1,31 @@
-# twitter4j-spring-boot-starter-parent
-SpringBoot Starter for Twitter4J
+# SpringBoot Starter for Twitter4J
 
 ## How to use?
 
-**cd twitter4j-spring-boot-starter**
+1. Install the `twitter4j-spring-boot-starter` locally
 
-**mvn clean install**
+    ```shell
+    git clone https://github.com/sivaprasadreddy/twitter4j-spring-boot-starter.git
+    cd twitter4j-spring-boot-starter
+    ./mvnw clean install
+    ```
 
-**cd twitter4j-spring-boot-sample**
+2. Add **twitter4j-spring-boot-starter** by adding the following dependency.
 
-Set your Twitter OAuth properties in **twitter4j-spring-boot-sample/src/main/resources/application.properties**
+    ```xml
+    <dependency>
+        <groupId>com.sivalabs</groupId>
+        <artifactId>twitter4j-spring-boot-starter</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+    ```
 
-**mvn clean test**
+3. Configure your Twitter OAuth properties in **example/src/main/resources/application.properties**
 
-You can add twitter4j-spring-boot-starter by adding the following dependency.
+Now you can run the application or tests as follows:
 
-~~~
-<dependency>
-	<groupId>com.sivalabs</groupId>
-	<artifactId>twitter4j-spring-boot-starter</artifactId>
-	<version>1.0-SNAPSHOT</version>
-</dependency>
-~~~
+```shell
+cd example
+./mvnw test
+./mvnw spring-boot:run
+```

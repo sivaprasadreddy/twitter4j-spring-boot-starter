@@ -1,2 +1,0 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.sivalabs.spring.boot.autoconfigure.Twitter4jAutoConfiguration
