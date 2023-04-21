@@ -20,12 +20,14 @@
     </dependency>
     ```
 
-3. Configure your Twitter OAuth properties in **example/src/main/resources/application.properties**
+3. Go to https://developer.twitter.com/, create an application and generate Keys and tokens
+
+4. Configure your Twitter OAuth properties in **example/src/main/resources/application.properties**
 
 Now you can run the application or tests as follows:
 
-```shell
-cd example
-./mvnw test
-./mvnw spring-boot:run
-```
+   ```shell
+   cd example
+   ./mvnw test
+   ./mvnw spring-boot:run
+   ```
